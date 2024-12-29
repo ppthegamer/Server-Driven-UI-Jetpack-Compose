@@ -1,6 +1,5 @@
 package com.praptechie.serverdrivenuijetpackcompose
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
@@ -15,149 +14,67 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
-import com.google.firebase.Firebase
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.database
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
+import com.praptechie.serverdrivenuijetpackcompose.data_models.ContentData
+import com.praptechie.serverdrivenuijetpackcompose.data_models.ServerDrivenUIData
+import com.praptechie.serverdrivenuijetpackcompose.ui_elements.ServerDrivenUIBox
+import com.praptechie.serverdrivenuijetpackcompose.ui_elements.ServerDrivenUIColumn
+import com.praptechie.serverdrivenuijetpackcompose.ui_elements.ServerDrivenUIRow
+import com.praptechie.serverdrivenuijetpackcompose.ui_elements.ServerDrivenUIText
+import com.praptechie.serverdrivenuijetpackcompose.view_model.ServerDrivenUIViewModel
+
 
 @Composable
-fun MainScreen(){
+fun MainScreen(serverDrivenUIViewModel: ServerDrivenUIViewModel = ServerDrivenUIViewModel()) {
+    val serverDrivenUIData by serverDrivenUIViewModel.serverDrivenUIData.collectAsState()
 
-    var serverDrivenUIData: List<ServerDrivenUIData>? by remember {
-        mutableStateOf(null)
-    }
-
-        serverDrivenUIData= getData().collectAsState(initial = null).value?.uiData
-    var contentAlignment:Alignment?=null
-    if (serverDrivenUIData!=null)
-        contentAlignment = boxContentAlignment(serverDrivenUIData?.get(0)!!)
-Box(modifier = Modifier.fillMaxSize(), contentAlignment = contentAlignment?:Alignment.TopStart){
-     RenderUI(serverDrivenUIData)}
+    var contentAlignment: Alignment? = null
+    if (serverDrivenUIData.uiData?.get(0) != null)
+        contentAlignment = boxContentAlignment(serverDrivenUIData.uiData?.get(0)!!)
+    if (serverDrivenUIData.uiData?.isNotEmpty() == true)
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = contentAlignment ?: Alignment.TopStart
+        ) {
+            RenderUI(serverDrivenUIData.uiData,null)
+        }
 
 }
 
 @Composable
-fun RenderUI(serverDrivenUIData: List<ServerDrivenUIData>?) {
+fun RenderUI(serverDrivenUIData: List<ServerDrivenUIData>?,contentData :ContentData?) {
     val context = LocalContext.current
-    var modifier :Modifier by remember {
+    var modifier: Modifier by remember {
         mutableStateOf(Modifier)
     }
 
-    serverDrivenUIData?.forEach { uiData->
-        uiData.let {data->
+    serverDrivenUIData?.forEach { data ->
 
-            data.children?.forEach {aasdf->
-                Log.e("asdfadsfafelasdfae",aasdf.toString())
-            }
-            modifier = contentModifier(data,context)
-            when(data.type){
-                "BOX"->{
 
-                    /* data.itemSize.let { size ->
-                        modifier= modifier
-                            .width(size?.width?.dp ?: 100.dp)
-                            .height(size?.height?.dp ?: 50.dp)
-                     }
-
-                     data.style?.modifier?.clip.let {clip->
-                        modifier=  when (clip?.shape) {
-                             "CIRCLE_SHAPE" -> modifier.clip(CircleShape)
-                             "CUSTOM" -> clip.radius?.let { radius ->
-                                 modifier.clip(RoundedCornerShape(radius.dp))
-                             }!!
-                             else -> modifier
-                         }
-
-                     }
-                     data.style?.modifier?.backgroundColor.let { color->
-
-                      modifier=   modifier.background(color = Color(android.graphics.Color.parseColor("#$color" ))
-                         )
-                     }
-                     data.style?.modifier?.padding.let {padding->
-                         Log.e("uipadding",padding.toString())
-                     modifier=    if(padding?.all!=null && padding.all>0)
-                             modifier.padding(padding.all.toInt().dp)
-                         else
-                             modifier.padding(top =padding?.top?.toInt()?.dp?:0.dp,start=padding?.left?.toInt()?.dp?:0.dp,end=padding?.right?.toInt()?.dp?:0.dp,bottom=padding?.bottom?.toInt()?.dp?:0.dp)
-                         }
-
-                     data.style?.modifier?.onClick.let {onClick->
-
-                         modifier=      modifier.clickable {
-                             when(onClick?.action?.perform){
-                                 "navigate"->{
-
-                                 }
-                                 "show_toast"->{
-                                     Toast.makeText(context,onClick.action.parameters?.text.toString(),Toast.LENGTH_LONG).show()
-
-                                 }
-                                 else ->{}
-
-                         }
-
-                     }
-                 }*/
-                    ServerDrivenUIBox(modifier = modifier,uiData=data)
+            modifier = contentModifier(data, context)
+            when (data.type) {
+                "BOX" -> {
+                    ServerDrivenUIBox(modifier = modifier, uiData = data,contentData=contentData)
                 }
-                "COLUMN"->
-                {
+
+                "COLUMN" -> {
                     ServerDrivenUIColumn(childrenData = data, modifier = modifier)
                 }
-                "ROW"->{
+
+                "ROW" -> {
                     ServerDrivenUIRow(childrenData = data, modifier = modifier)
                 }
-                "TEXT"->
-                {
-                    Log.e("iasdfadf",data.toString())
+
+                "TEXT" -> {
                     ServerDrivenUIText(childrenData = data, modifier = modifier)
                 }
-                else ->{
-                    Text(text = "${data.type}" , color = Color.Black, fontSize = 15.sp)
+
+                else -> {
+                    Text(text = "${data.type}", color = Color.Black, fontSize = 15.sp)
                 }
             }
         }
 
 
-    }
-}
 
-
-
-
-
-
-fun getData(): Flow<ServerDrivenUIHeaderJsonData?> = callbackFlow {
-    val database = Firebase.database
-    val myRef = database.getReference()
-
-    val listener = object : ValueEventListener {
-        override fun onDataChange(snapshot: DataSnapshot) {
-            try {
-                val jsonData = snapshot.getValue(ServerDrivenUIHeaderJsonData::class.java)
-                // Emit the fetched data to the Flow
-                trySend(jsonData)
-            } catch (e: Exception) {
-                // Handle error if necessary
-                trySend(null)
-            }
-        }
-
-        override fun onCancelled(error: DatabaseError) {
-            // Handle error if necessary
-            trySend(null)
-        }
-    }
-
-    // Attach the listener to the database reference
-    myRef.addValueEventListener(listener)
-
-    // Return a cleanup action when the flow collection is canceled
-    awaitClose { myRef.removeEventListener(listener) }
 }
 

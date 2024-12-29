@@ -16,8 +16,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
+import com.praptechie.serverdrivenuijetpackcompose.data_models.ServerDrivenUIData
 
-fun contentModifier(data: ServerDrivenUIData,context: Context):Modifier{
+fun contentModifier(data: ServerDrivenUIData, context: Context):Modifier{
 
     var modifier :Modifier =Modifier
     data.itemSize.let { size ->
@@ -93,6 +94,7 @@ fun columnStyle(data: ServerDrivenUIData): Pair<Alignment.Horizontal?, Arrangeme
         "SPACED_EVENLY" -> Arrangement.SpaceEvenly
         "SPACED_BETWEEN" -> Arrangement.SpaceBetween
         "SPACED_AROUND" -> Arrangement.SpaceAround
+        "SPACE_BY" -> {Arrangement.spacedBy(data.style.columnStyle.spaceBy?.dp?:0.dp)}
         else ->null
     }
 
@@ -108,6 +110,7 @@ fun rowStyle(data: ServerDrivenUIData): Pair<Alignment.Vertical?, Arrangement.Ho
         "SPACED_EVENLY" -> Arrangement.SpaceEvenly
         "SPACED_BETWEEN" -> Arrangement.SpaceBetween
         "SPACED_AROUND" -> Arrangement.SpaceAround
+        "SPACE_BY" -> {Arrangement.spacedBy(data.style.rowStyle.spaceBy?.dp?:0.dp)}
         else -> null // No arrangement when not specified
     }
 
