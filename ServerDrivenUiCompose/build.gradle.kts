@@ -6,13 +6,15 @@ plugins {
 publishing {
     publications {
         create<MavenPublication>("release") {
-            groupId = "ppthegamer"
+            groupId = "com.github.ppthegamer"
             artifactId = "server-driven-ui-compose"
             version = "1.0.0"
+        }
+    }
 
-            afterEvaluate {
-                from(components["release"])
-            }
+    afterEvaluate {
+        publishing.publications["release"].apply {
+            (this as MavenPublication).from(components["release"])
         }
     }
 }
