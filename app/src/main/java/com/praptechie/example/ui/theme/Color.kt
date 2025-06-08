@@ -1,4 +1,4 @@
-package com.praptechie.serverdrivenuijetpackcompose.ui.theme
+package com.praptechie.example.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

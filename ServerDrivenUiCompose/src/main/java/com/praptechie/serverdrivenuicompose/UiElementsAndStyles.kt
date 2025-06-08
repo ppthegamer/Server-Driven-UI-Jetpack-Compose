@@ -1,4 +1,4 @@
-package com.praptechie.serverdrivenuijetpackcompose
+package com.praptechie.serverdrivenuicompose
 
 import android.content.Context
 import android.widget.Toast
@@ -16,7 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
-import com.praptechie.serverdrivenuijetpackcompose.data_models.ServerDrivenUIData
+import com.praptechie.serverdrivenuicompose.data_models.ServerDrivenUIData
 
 fun contentModifier(data: ServerDrivenUIData, context: Context):Modifier{
 

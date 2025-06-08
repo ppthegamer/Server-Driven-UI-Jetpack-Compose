@@ -1,19 +1,15 @@
-package com.praptechie.serverdrivenuijetpackcompose.ui_elements
+package com.praptechie.serverdrivenuicompose.ui_elements
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.sp
-import com.praptechie.serverdrivenuijetpackcompose.RenderUI
-import com.praptechie.serverdrivenuijetpackcompose.data_models.ServerDrivenUIData
-import com.praptechie.serverdrivenuijetpackcompose.columnStyle
+import com.praptechie.serverdrivenuicompose.RenderUI
+import com.praptechie.serverdrivenuicompose.columnStyle
+import com.praptechie.serverdrivenuicompose.data_models.ServerDrivenUIData
 
 
 @Composable

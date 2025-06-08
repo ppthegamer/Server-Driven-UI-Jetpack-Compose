@@ -1,4 +1,4 @@
-package com.praptechie.serverdrivenuijetpackcompose.ui_elements
+package com.praptechie.serverdrivenuicompose.ui_elements
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -6,8 +6,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
-import com.praptechie.serverdrivenuijetpackcompose.RenderUI
-import com.praptechie.serverdrivenuijetpackcompose.data_models.ServerDrivenUIData
+import com.praptechie.serverdrivenuicompose.RenderUI
+import com.praptechie.serverdrivenuicompose.data_models.ServerDrivenUIData
+
 
 @Composable
 fun ServerDrivenUIText(childrenData: ServerDrivenUIData, modifier: Modifier) {

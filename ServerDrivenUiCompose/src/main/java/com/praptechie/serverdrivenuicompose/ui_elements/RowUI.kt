@@ -1,4 +1,4 @@
-package com.praptechie.serverdrivenuijetpackcompose.ui_elements
+package com.praptechie.serverdrivenuicompose.ui_elements
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -8,9 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.praptechie.serverdrivenuijetpackcompose.RenderUI
-import com.praptechie.serverdrivenuijetpackcompose.data_models.ServerDrivenUIData
-import com.praptechie.serverdrivenuijetpackcompose.rowStyle
+import com.praptechie.serverdrivenuicompose.RenderUI
+import com.praptechie.serverdrivenuicompose.data_models.ServerDrivenUIData
+import com.praptechie.serverdrivenuicompose.rowStyle
+
 
 @Composable
 fun ServerDrivenUIRow(childrenData: ServerDrivenUIData, modifier: Modifier,) {

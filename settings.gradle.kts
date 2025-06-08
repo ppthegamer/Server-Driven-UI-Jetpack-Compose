@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Server Driven UI Jetpack Compose"
 include(":app")
+include(":ServerDrivenUiCompose")

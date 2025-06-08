@@ -1,4 +1,4 @@
-package com.praptechie.serverdrivenuijetpackcompose.data_models
+package com.praptechie.serverdrivenuicompose.data_models
 
 data class ServerDrivenUIHeaderJsonData(
     val uiData:List<ServerDrivenUIData>?=null
