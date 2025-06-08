@@ -1,4 +1,4 @@
-package com.praptechie.serverdrivenuijetpackcompose.ui_elements
+package com.praptechie.serverdrivenuicompose.ui_elements
 
 
 import androidx.compose.foundation.layout.Box
@@ -8,12 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
-import com.praptechie.serverdrivenuijetpackcompose.data_models.ServerDrivenUIData
-import com.praptechie.serverdrivenuijetpackcompose.boxContentAlignment
-import com.praptechie.serverdrivenuijetpackcompose.data_models.ContentData
+import com.praptechie.serverdrivenuicompose.boxContentAlignment
+import com.praptechie.serverdrivenuicompose.data_models.ContentData
+import com.praptechie.serverdrivenuicompose.data_models.ServerDrivenUIData
 
 @Composable
-fun ServerDrivenUIBox(modifier: Modifier, uiData: ServerDrivenUIData,contentData: ContentData?) {
+fun ServerDrivenUIBox(modifier: Modifier, uiData: ServerDrivenUIData, contentData: ContentData?) {
     val contentAlignment = boxContentAlignment(uiData)
 
     Box(modifier = modifier, contentAlignment = contentAlignment){
