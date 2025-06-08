@@ -1,11 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("maven-publish")
+    `maven-publish`
 }
 publishing {
     publications {
-        create<MavenPublication>("release") {
+        register<MavenPublication>("release") {
             groupId = "com.github.ppthegamer"
             artifactId = "server-driven-ui-compose"
             version = "1.0.3"
@@ -17,6 +17,7 @@ publishing {
         }
     }
 }
+group = "com.github.ppthegamer"
 
 android {
     namespace = "com.praptechie.serverdrivenuicompose"
@@ -32,6 +33,7 @@ android {
     publishing{
         singleVariant("release") {
             withSourcesJar()
+
             withJavadocJar()
         }
     }
