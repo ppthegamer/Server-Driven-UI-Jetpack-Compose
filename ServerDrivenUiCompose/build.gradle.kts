@@ -8,7 +8,7 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "com.github.ppthegamer"
             artifactId = "server-driven-ui-compose"
-            version = "1.0.2"
+            version = "1.0.3"
 
             // Proper place for this line
             afterEvaluate {
