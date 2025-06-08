@@ -8,16 +8,16 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "com.github.ppthegamer"
             artifactId = "server-driven-ui-compose"
-            version = "1.0.0"
-        }
-    }
+            version = "1.0.2"
 
-    afterEvaluate {
-        publishing.publications["release"].apply {
-            (this as MavenPublication).from(components["release"])
+            // Proper place for this line
+            afterEvaluate {
+                from(components["release"])
+            }
         }
     }
 }
+
 android {
     namespace = "com.praptechie.serverdrivenuicompose"
     compileSdk = 34
