@@ -1,5 +1,7 @@
 # Server-Driven UI with Firebase
 
+[![](https://jitpack.io/v/ppthegamer/Server-Driven-UI-Jetpack-Compose.svg)](https://jitpack.io/#ppthegamer/Server-Driven-UI-Jetpack-Compose)
+
 ## Overview
 The **Server-Driven UI with Firebase** project dynamically renders user interfaces based on JSON configurations fetched from a Firebase Realtime Database. This approach provides a flexible way to update the app's UI without requiring app updates.
 
