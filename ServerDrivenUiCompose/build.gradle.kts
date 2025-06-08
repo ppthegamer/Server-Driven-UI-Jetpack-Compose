@@ -1,11 +1,11 @@
 plugins {
-    alias(libs.plugins.android.library)
+    id("com.android.library")
     alias(libs.plugins.jetbrains.kotlin.android)
-    `maven-publish`
+    (`maven-publish`)
 }
 publishing {
     publications {
-        register<MavenPublication>("release") {
+        create<MavenPublication>("release") {
             groupId = "com.github.ppthegamer"
             artifactId = "server-driven-ui-compose"
             version = "1.0.3"
